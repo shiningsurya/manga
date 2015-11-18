@@ -23,7 +23,14 @@ do
 		break
 	fi
 	rm index.html
-	for i in {1..100}
+	## To determine the number of pages in a chapter
+	echo "Finding out the number of pages in $chap of $ip_manga..."
+	wget -o log.txt -O 1.html -c www.mangareader.net/$manga/$chap/1
+	endder=`grep "option value" 1.html | wc -l`
+	rm 1.html
+	## Having found what we wanted to find. 
+	## We proceed further.
+	for i in `seq 1 $ennder`
 	do
 		echo "Downloading page $i of chapter $chap....."
 		wget -o log.txt -O $i.html -c www.mangareader.net/$manga/$chap/$i
